@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Automated Wheel Truing Stand Part 1 - Project Space</title>
+  <link rel="stylesheet" href="../styles.css"/>
+  <script src="https://unpkg.com/htmx.org@1.10.2"></script>
+  <style>
+    body {
+      background-color: #23272f;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    
+header {
+  max-width: 1100px;
+  margin: 0 auto 2rem auto;
+  padding: 2rem 0 0 0;
+  background: none;
+  box-shadow: none;
+}
+header h1 {
+  margin: 0 0 0.5em 0;
+  font-size: 2.5rem;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-align: center;
+}
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+  background: #fff;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+.main-nav a {
+  color: #666666;
+  text-decoration: none;
+  padding: 0.3em 0.7em;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+.main-nav a:hover, .main-nav a.active {
+  background: #f0f0f0;
+}
+
+    #post-content {
+      background-color: white;
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    .image-container {
+      text-align: center;
+      margin: 2em auto;
+    }
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .cover-image {
+      max-width: 100%;
+      margin: 1.5em auto 2.5em;
+      text-align: center;
+    }
+    .cover-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    figure.image-container {
+      display: block;
+      margin: 2em auto;
+    }
+    figcaption {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 0.5em;
+      text-align: center;
+      font-style: italic;
+    }
+    h2, h3, h4 {
+      color: #23272f;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 2rem;
+      border-bottom: 2px solid #bbb;
+      display: inline-block;
+      padding-bottom: 0.2em;
+    }
+    h3 {
+      font-size: 1.3rem;
+    }
+    h4 {
+      font-size: 1.1rem;
+    }
+    time {
+      display: block;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-bottom: 1.2rem;
+    }
+    .site-footer {
+      text-align: center;
+      color: #888;
+      font-size: 1em;
+      padding: 2em 0 1em 0;
+      background: none;
+    }
+    .contact-section {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #ddd;
+    }
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    .email-form label {
+      font-weight: 500;
+    }
+    .email-form input[type="text"], 
+    .email-form input[type="email"], 
+    .email-form textarea {
+      padding: 0.7em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .email-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .email-form button {
+      background: #666666;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.8em 1.5em;
+      font-size: 1em;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.15s;
+    }
+    .email-form button:hover {
+      background: #555555;
+    }
+    .subscribe-section {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #ddd;
+    }
+    .subscribe-section p {
+      margin-bottom: 1rem;
+      font-size: 0.95em;
+      color: #555;
+    }
+    .subscribe-input-group {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 500px;
+    }
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      padding: 0.7em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .subscribe-form button {
+      background: #666666;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.7em 1.2em;
+      font-size: 1em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .subscribe-form button:hover {
+      background: #555555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Project Space</h1>
+    <nav class="main-nav">
+  <a href="/" hx-get="/" hx-swap="innerHTML" hx-target="#content">Home</a>
+  <a href="/contact.html" hx-get="/contact.html" hx-swap="innerHTML" hx-target="#content">Contact</a>
+</nav>
+  </header>
+  <article id="post-content">
+    <h2>Automated Wheel Truing Stand Part 1</h2>
+    <time datetime="2018-06-23">June 23, 2018</time>
+    <div class="cover-image"><img src="/assets/images/ats-prototype-1-41-2-2.jpg" alt="Cover image"/></div>
+    <h2>Background</h2>
+<p>I used to commute every day to work (~18km) and used heavy panniers on the pothole filled roads of London. After a year with this kind of commute – plus a France cycle tour (~1000km), my rear wheel had had enough. A spoke broke on my cycle tour and I was put in the position of either replacing the wheel or re-truing it.</p>
+<p>I opted to buy some new spokes, replace the broken one and re-true it using my frame and brake pads as a guide. This was both not that fun and took quite a bit longer than I would have liked! I’d been thinking about doing a new automation project and an idea popped into my head; what if I could place the wheel in a machine that would do all of this for me and I would never have to worry about re-truing my wheel again? And so the project began.</p>
+<h2>Goal</h2>
+<p><em>Create a fully automated bicycle wheel truing stand that will true a wheel with no human intervention.</em></p>
+<h2>Stages:</h2>
+<h3>Stage 1</h3>
+<ul>
+<li>Generate concept designs of the system, create 3D CAD model and build a cheap proof of concept prototype.</li>
+</ul>
+<h3>Stage 2</h3>
+<ul>
+<li>Wire electronics and write code to enable a semi-automated process with the stand recording how untrue the wheel is and directing the user to tighten the correct spokes in the correct order.</li>
+</ul>
+<h3>Stage 3</h3>
+<ul>
+<li>Create concepts of automated spoke tightening mechanism and test.</li>
+</ul>
+<h3>Stage 4</h3>
+<ul>
+<li>Assemble final prototype and amalgamate all aspects of the machine.</li>
+</ul>
+<h2>Stage 1</h2>
+<ul>
+<li><em>Generate concept designs of the system, create 3D CAD model and build a cheap proof of concept prototype.</em></li>
+</ul>
+<p>I realized the system would require a few fundamental features to work:</p>
+<ol>
+<li>A stiff frame to secure the wheel, preferably positioned in the same way each time.</li>
+<li>A way of measuring the deflection of the un-true rim.</li>
+<li>A method of the machine knowing the wheel's position and the position of the spokes.</li>
+<li>A method of rotating the wheel.</li>
+<li>A method to tighten each spoke and ensure tension is correct and consistent.</li>
+</ol>
+<p>To build a quick and dirty proof of concept prototype, I needed a frame that would both secure the wheel and facilitate the mounting of additional hardware. I found what I thought was a hardwood table of the right size locally on Gumtree and cut a slot out of the middle of it. First mistake. The centre had a single stiffening element but the remainder was just corrugated cardboard rendering the table completely useless as it had lost its stiffness entirely.</p>
+<p><figure class="image-container" style="max-width: 486px; margin: 0 auto;">
+<img alt="IMG_20180325_155302" src="/assets/images/img_20180325_155302.jpg" />
+<figcaption>Original idea for the frame that didn't work out...</figcaption>
+</figure></p>
+<p>Luckily, I had a spare 1.76m length of wood (50mm x 50mm cross-section) that was reasonably stiff and would allow me to easily modify the stand and mount hardware. The only issue was that I had a limited length and didn't want to buy more material so I designed the prototype with that in mind.</p>
+<p><figure class="image-container" style="max-width: 527px; margin: 0 auto;">
+<img alt="ats-prototype-1.41-2 (2)" src="/assets/images/ats-prototype-1-41-2-2.jpg" />
+<figcaption></figcaption>
+</figure></p>
+<p>After measuring and modeling my old wheel, I designed a basic frame with the available wood I had and designed brackets that I planned to 3D print. I designed a mount for a spare NEMA 17 stepper motor I had, mounts for the wheel and some angle brackets to keep everything square and make up for my less than perfect hand sawing.</p>
+<p>From here, I marked and cut down my length of wood and marked up and drilled the pilot holes for the mounts and brackets.</p>
+<p><figure class="image-container" style="max-width: 486px; margin: 0 auto;">
+<img alt="IMG_20180616_112635" src="/assets/images/img_20180616_112635.jpg" />
+<figcaption>Sawing wood</figcaption>
+</figure></p>
+<p><figure class="image-container" style="max-width: 486px; margin: 0 auto;">
+<img alt="IMG_20180619_212914" src="/assets/images/img_20180619_212914.jpg" />
+<figcaption>Marking and drilling</figcaption>
+</figure></p>
+<p>Then I 3D printed the mounts and angle brackets in PETG on my home-built RepRap Prusa i3 3D printer (blog to follow) over the course of a few evenings. I've been using PETG exclusively for a while now and it has been great. It has the strength and rigidity of ABS and it is about as easy to print with as PLA.</p>
+<p><figure class="image-container" style="max-width: 486px; margin: 0 auto;">
+<img alt="IMG_20180624_153246" src="/assets/images/img_20180624_153246.jpg" />
+<figcaption>3D printed angle brackets</figcaption>
+</figure></p>
+<p>I used some cheap wood screws to screw everything together and mounted my old untrue wheel. I immediately realized that I'd based the width of the wheel hub of my front wheel which was 30mm narrower than my rear wheel hub.</p>
+<p><figure class="image-container" style="max-width: 486px; margin: 0 auto;">
+<img alt="IMG_20180625_221232" src="/assets/images/img_20180625_221232.jpg" />
+<figcaption>First trial fitting</figcaption>
+</figure></p>
+<p>I then re-designed, 3D printed and fixed the new mounts to the frame which worked great! Although the frame isn't that stiff and won't be suitable for very precise measurements, I'm hoping it will be fine for the proof of concept prototype.</p>
+<p><figure class="image-container" style="max-width: 486px; margin: 0 auto;">
+<img alt="IMG_20180701_194054" src="/assets/images/img_20180701_1940541.jpg" />
+<figcaption>Stand with motor and wheel</figcaption>
+</figure></p>
+<p>My initial idea for spinning the wheel was to use the tire as a spring so even if the wheel is a little out of true in the z-direction, the tire can compress as it is being rotated by the roller.</p>
+<p>I designed the wheel roller geometry to be similar to a pulley which I thought would most effectively grip the tyre of the wheel from both sides. However, I found that due to how untrue my wheel was, there was either too much pressure when the deflated tyre was deviating to the side, or little to no pressure when the tyre was in the middle of the roller.</p>
+<p><figure class="image-container" style="max-width: 486px; margin: 0 auto;">
+<img alt="IMG_20180701_194116" src="/assets/images/img_20180701_194116.jpg" />
+<figcaption>The first iteration of the wheel roller</figcaption>
+</figure></p>
+<p>I tried a simple cylinder instead and reprinted and assembled the roller and found that it worked effectively, with the roller and tyre staying in full contact over an entire revolution. The render below shows the through hole for the motor shaft which I designed with an interference fit, a slot for the captive nut and side hole for a grub screw.</p>
+<p><figure class="image-container" style="max-width: 486px; margin: 0 auto;">
+<img alt="untitled.52 (2)" src="/assets/images/untitled-52-2.jpg" />
+<figcaption>Wheel roller MK2</figcaption>
+</figure></p>
+<p>The next <a href="https://jackchartres.xyz/2018/12/03/automated-wheel-truing-stand-part-2/">blog post</a> on this topic will detail Stage 2 which will include wiring up and mounting the electronics as well as creating a semi-automated wheel truing process.</p>
+    
+    <div class="contact-section">
+      <h3>Contact Me About This Post</h3>
+      <form class="email-form" action="mailto:your-email@example.com" method="post" enctype="text/plain">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required />
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" value="Re: Automated Wheel Truing Stand Part 1" required />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+        <button type="submit">Send Email</button>
+      </form>
+    </div>
+    
+    <div class="subscribe-section">
+      <h3>Subscribe to Blog Updates</h3>
+      <p>Enter your email to receive notifications when new posts are published.</p>
+      <form class="subscribe-form" action="mailto:your-email@example.com?subject=Blog Subscription" method="post" enctype="text/plain">
+        <div class="subscribe-input-group">
+          <input type="email" id="subscribe-email" name="subscribe-email" placeholder="Your email address" required />
+          <button type="submit">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </article>
+  <footer class="site-footer">© jackchartres.xyz 2025</footer>
+</body>
+</html>

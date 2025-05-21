@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Automated Wheel Truing Stand Part 3 - Project Space</title>
+  <link rel="stylesheet" href="../styles.css"/>
+  <script src="https://unpkg.com/htmx.org@1.10.2"></script>
+  <style>
+    body {
+      background-color: #23272f;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    
+header {
+  max-width: 1100px;
+  margin: 0 auto 2rem auto;
+  padding: 2rem 0 0 0;
+  background: none;
+  box-shadow: none;
+}
+header h1 {
+  margin: 0 0 0.5em 0;
+  font-size: 2.5rem;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-align: center;
+}
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+  background: #fff;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+.main-nav a {
+  color: #666666;
+  text-decoration: none;
+  padding: 0.3em 0.7em;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+.main-nav a:hover, .main-nav a.active {
+  background: #f0f0f0;
+}
+
+    #post-content {
+      background-color: white;
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    .image-container {
+      text-align: center;
+      margin: 2em auto;
+    }
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .cover-image {
+      max-width: 100%;
+      margin: 1.5em auto 2.5em;
+      text-align: center;
+    }
+    .cover-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    figure.image-container {
+      display: block;
+      margin: 2em auto;
+    }
+    figcaption {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 0.5em;
+      text-align: center;
+      font-style: italic;
+    }
+    h2, h3, h4 {
+      color: #23272f;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 2rem;
+      border-bottom: 2px solid #bbb;
+      display: inline-block;
+      padding-bottom: 0.2em;
+    }
+    h3 {
+      font-size: 1.3rem;
+    }
+    h4 {
+      font-size: 1.1rem;
+    }
+    time {
+      display: block;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-bottom: 1.2rem;
+    }
+    .site-footer {
+      text-align: center;
+      color: #888;
+      font-size: 1em;
+      padding: 2em 0 1em 0;
+      background: none;
+    }
+    .contact-section {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #ddd;
+    }
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    .email-form label {
+      font-weight: 500;
+    }
+    .email-form input[type="text"], 
+    .email-form input[type="email"], 
+    .email-form textarea {
+      padding: 0.7em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .email-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .email-form button {
+      background: #666666;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.8em 1.5em;
+      font-size: 1em;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.15s;
+    }
+    .email-form button:hover {
+      background: #555555;
+    }
+    .subscribe-section {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #ddd;
+    }
+    .subscribe-section p {
+      margin-bottom: 1rem;
+      font-size: 0.95em;
+      color: #555;
+    }
+    .subscribe-input-group {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 500px;
+    }
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      padding: 0.7em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .subscribe-form button {
+      background: #666666;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.7em 1.2em;
+      font-size: 1em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .subscribe-form button:hover {
+      background: #555555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Project Space</h1>
+    <nav class="main-nav">
+  <a href="/" hx-get="/" hx-swap="innerHTML" hx-target="#content">Home</a>
+  <a href="/contact.html" hx-get="/contact.html" hx-swap="innerHTML" hx-target="#content">Contact</a>
+</nav>
+  </header>
+  <article id="post-content">
+    <h2>Automated Wheel Truing Stand Part 3</h2>
+    <time datetime="2019-01-13">January 13, 2019</time>
+    <div class="cover-image"><img src="/assets/images/ats-1-e1541243372945.jpg" alt="Cover image"/></div>
+    <p>In my last <a href="https://jackchartres.xyz/2018/12/03/automated-wheel-truing-stand-part-2/">blog post</a> I outlined the electronics I used for this project and in this post, I will continue to describe the semi-automated wheel truing process.</p>
+<h3>Stage 2 continued: Semi-automated wheel truing process</h3>
+<p>After testing the DTI serial communication, I mounted the DTI to the stand and modified the Arduino code to output the value of the DTI when requested.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="IMG_20180922_173130" src="/assets/images/img_20180922_173130-e1541244838765.jpg" />
+<figcaption>DTI in line with spoke with serial communication wires</figcaption>
+</figure></p>
+<p>I then created an algorithm to gather the deflection value of the rim at each spoke. To do this, I used my "Go to spoke" algorithm to go to each spoke sequentially, pause for a short time to ensure there were no residual vibrations, and read the deflection value from the DTI.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="giphy1" src="/assets/images/giphy1.gif" />
+<figcaption>"Gather deflections" algorithm</figcaption>
+</figure></p>
+<p>After gathering all of the deflections, the algorithm returns the largest absolute deflection to the Arduino serial monitor and then presents the spoke with the worst deflection for the user to adjust.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="Screenshot 2018-10-20 09.41.44" src="/assets/images/screenshot-2018-10-20-09-41-44-e1541245261157.png" />
+<figcaption>Arduino Serial Monitor Output showing deflection at each spoke</figcaption>
+</figure></p>
+<p>For adjustment, the serial monitor outputs the turn required (e.g. 1/4 turn) in the direction required (e.g. tighten/loosen - clockwise/anticlockwise). Tightening the spoke pulls the rim to the side of the hub where the spoke is attached whereas loosening it does the opposite. The required adjustment depended on the absolute value of the deflection so large deflections corresponded to large adjustments.</p>
+<p>To allow easy adjustment of the worst offending spoke, the adjustment offset was set to be 5 spokes from the detector. I 3D printed a simple indicator to show which spoke requires adjustment, however, this did not work as intended as the distance differs depending on which side of the hub the spoke is attached. The final solution will have automated spoke adjustment so I did not get around to fixing this issue and I counted the offset manually instead.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="IMG_20180923_210050" src="/assets/images/img_20180923_210050-e1541242976879.jpg" />
+<figcaption>Spoke Adjustment Indicator</figcaption>
+</figure></p>
+<p>To allow the truing process to continue, I added a push button to the circuit which should be pressed after the spoke has been adjusted. Pushing the button gathers all of the deflections of each spoke again and presents the user with the new worst spoke and the instruction on how to adjust it.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="IMG_20180922_225432" src="/assets/images/img_20180922_225432-e1541243087944.jpg" />
+<figcaption>Push button</figcaption>
+</figure></p>
+<p>As this process is repeated over many spokes and the deflections decrease, the adjustment becomes finer and finer until all deflections are within a +/- 0.5mm range, which is deemed acceptable according to research I did on wheel truing.</p>
+<p>The final circuit is shown below.</p>
+<p><figure class="image-container" style="max-width: 599px; margin: 0 auto;">
+<img alt="stepper_laser_setup_bb" src="/assets/images/stepper_laser_setup_bb.jpg" />
+<figcaption>Final Fritzing Diagram of Electronics</figcaption>
+</figure></p>
+<p>The below image shows the final proof of concept setup with my wheel mounted on the stand. My very broken old wheel was lost when I moved house so I had to use my new one instead. I had to modify the code to account for 24 spokes instead of 32 and add spacers to the laser sensor bracket to increase the offset distance between the laser and DTI. This will be a user input and a mechanical adjustment in the next iteration.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="ATS-1" src="/assets/images/ats-1-e1541243372945.jpg" />
+<figcaption>Final setup</figcaption>
+</figure></p>
+<h3>Python plots</h3>
+<p>To visualise what was going on with the wheel deflection values, I created some plots in Python using matplotlib. It took a while for me to think of the best way to present the results (initially I was thinking of rotated 3D plots) but in the end, I thought a side view of the rim would be best. I created the first plot using matplotlib in Python using a colour bar to indicate the magnitude of the deflection at each spoke position. A positive value signifies a deflection towards the DTI, whilst a negative value signifies a deflection away from the DTI. Green indicates the rim is "trued" whilst dark blue and dark red indicate an "untrued" value.</p>
+<p>This was the first set of results that I got from my first successful run on my old wheel with the DTI measuring the deflection at each spoke position.</p>
+<p><figure class="image-container" style="max-width: 671px; margin: 0 auto;">
+<img alt="FIRST RESULT" src="/assets/images/first-result2.png" />
+<figcaption>Plot of the first set of deflection results</figcaption>
+</figure></p>
+<p>I then investigated how repeatable my measurements were. To do this, I ran the "gather deflections" algorithm three times without adjusting any spokes, and recorded the deflections. As the next plot shows, the system is quite reliable although there was one anomalous result on spoke six that requires further investigation into the reason behind the anomaly. The average standard deviation was calculated at 0.031mm excluding the deflection values from spoke 6. The green band indicates the acceptable range of where the deflection values can lie for the wheel to be trued.</p>
+<p><figure class="image-container" style="max-width: 1920px; margin: 0 auto;">
+<img alt="ATS-7" src="/assets/images/ats-7.png" />
+<figcaption>Repeatability plot</figcaption>
+</figure></p>
+<p>After ensuring the system was fairly repeatable, I carried out the first full truing operation. I already knew that my new wheel was reasonably true except from the one high spot that was observed from spinning it in my bicycle frame and as can be seen on the repeatability plot.</p>
+<p>The following GIF shows the entire truing process with each image representing the state of the deflections, proceeding to the next image which shows its new state after adjusting the spoke with the greatest deflection value.</p>
+<p><figure class="image-container" style="max-width: 3600px; margin: 0 auto;">
+<img alt="plots" src="/assets/images/plots.gif" />
+<figcaption>Detected measurements</figcaption>
+</figure></p>
+<p>As can be seen, the semi-automated wheel truing process was somewhat successful, with the image going from yellow to green (albeit with a couple of anomalous results) producing a final worst deflection value of -0.52mm. This was close enough to the 0.5mm threshold I had set as I was running out of time before moving abroad.</p>
+<h2>Errors and uncertainties and future work</h2>
+<p>I will lay out some error inducing areas which need to be resolved in the next iteration as well as future improvement on the path to full automation.</p>
+<h3>Measurement error</h3>
+<p>One potential area that could cause an error is the wear groove that is present on most bicycle wheel rims. Due to the way that the DTI probe is running along the wheel rim, this could introduce an error at some spoke positions, however, due to the low impact in deflection deviation, it may not be worth considering or rectifying.</p>
+<h3>Stand</h3>
+<p>The stand material and construction is obviously less than perfect for this application. The wood was cut by hand meaning the stand is not as square as it could be and will deflect with a relatively small load. For the next iteration of the wheel truing stand, I think I'm going to get some 40mm x 40mm aluminium extrusions for improved stiffness and a lot of t-slot nuts to fit all of the bracketry.</p>
+<h3>Spoke tension</h3>
+<p>This is something that I knew would be an issue from the start. Without ensuring the spoke tension is sufficient for each spoke, the wheel could be completely true but the spoke tension could be too low, meaning that as soon as the wheel is used on a bicycle, it could immediately lose its "trueness". A future improvement would be a clever way of measuring the tension of each spoke of the wheel but this requires further thought on how this will be achieved.</p>
+<h3>Noise</h3>
+<p>When gathering deflection values, occasionally (approximately 1 in 20 results) the returned value would be wildly incorrect giving a deflection of 10s to 1000s of mm. My current method of rectifying these incorrect values was to drive the motor to reverse the wheel and retake the measurement until it was below 5mm absolute deflection. This is a less than ideal solution, so I will further investigate the cause of this noise which could be data processing errors or signal noise of some kind.</p>
+<h3>Adjustment</h3>
+<p>To allow for different sized wheels, I will incorporate some level of adjustment in the stand such as sliding brackets for the DTI, laser sensor and motor, perhaps with t-slot nuts and quick adjustment knobs.</p>
+<p>As well as this, the number of spokes can vary from wheel to wheel so the user interface could be enhanced, possibly with a display and input to allow the user to enter different values.</p>
+<h3>Accuracy</h3>
+<p>I may add an additional DTI on the opposite side of the rim to offer some redundancy and potentially increase the accuracy of the measurements.</p>
+<h3>Full automation</h3>
+<p>The end goal of the project is to have a fully automated system. This will require a mechanism to adjust the spokes. I think this will be the most technically challenging part of the project to ensure that it is reliable and has the minimum number of actuators and minimum power requirements. It may also require a camera or another sensing device to capture the spoke nipple orientation to determine the approaching angle of the tightening mechanism.</p>
+<h3>Vibration and audible noise reduction</h3>
+<p>Currently, the stepper motor uses an A4988 stepper driver which works well but is quite noisy and causes a lot of vibrations in the system. I may replace this with a silent stepper driver which has become available in the last few years due to noise reduction in 3D printers. This should reduce the audible noise and vibrations of the system significantly.</p>
+<h3>Speed</h3>
+<p>I may introduce some gearing to increase the speed of wheel rotation because it currently operates at a snail's pace.</p>
+<h2>Conclusion</h2>
+<p>I'm pretty happy with the project so far and look forward to creating a fully automated solution with the improvements stated above when I have the time.</p>
+    
+    <div class="contact-section">
+      <h3>Contact Me About This Post</h3>
+      <form class="email-form" action="mailto:your-email@example.com" method="post" enctype="text/plain">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required />
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" value="Re: Automated Wheel Truing Stand Part 3" required />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+        <button type="submit">Send Email</button>
+      </form>
+    </div>
+    
+    <div class="subscribe-section">
+      <h3>Subscribe to Blog Updates</h3>
+      <p>Enter your email to receive notifications when new posts are published.</p>
+      <form class="subscribe-form" action="mailto:your-email@example.com?subject=Blog Subscription" method="post" enctype="text/plain">
+        <div class="subscribe-input-group">
+          <input type="email" id="subscribe-email" name="subscribe-email" placeholder="Your email address" required />
+          <button type="submit">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </article>
+  <footer class="site-footer">© jackchartres.xyz 2025</footer>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>2D plotter Part 1 - Project Space</title>
+  <link rel="stylesheet" href="../styles.css"/>
+  <script src="https://unpkg.com/htmx.org@1.10.2"></script>
+  <style>
+    body {
+      background-color: #23272f;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    
+header {
+  max-width: 1100px;
+  margin: 0 auto 2rem auto;
+  padding: 2rem 0 0 0;
+  background: none;
+  box-shadow: none;
+}
+header h1 {
+  margin: 0 0 0.5em 0;
+  font-size: 2.5rem;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-align: center;
+}
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+  background: #fff;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+.main-nav a {
+  color: #666666;
+  text-decoration: none;
+  padding: 0.3em 0.7em;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+.main-nav a:hover, .main-nav a.active {
+  background: #f0f0f0;
+}
+
+    #post-content {
+      background-color: white;
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    .image-container {
+      text-align: center;
+      margin: 2em auto;
+    }
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .cover-image {
+      max-width: 100%;
+      margin: 1.5em auto 2.5em;
+      text-align: center;
+    }
+    .cover-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    figure.image-container {
+      display: block;
+      margin: 2em auto;
+    }
+    figcaption {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 0.5em;
+      text-align: center;
+      font-style: italic;
+    }
+    h2, h3, h4 {
+      color: #23272f;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 2rem;
+      border-bottom: 2px solid #bbb;
+      display: inline-block;
+      padding-bottom: 0.2em;
+    }
+    h3 {
+      font-size: 1.3rem;
+    }
+    h4 {
+      font-size: 1.1rem;
+    }
+    time {
+      display: block;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-bottom: 1.2rem;
+    }
+    .site-footer {
+      text-align: center;
+      color: #888;
+      font-size: 1em;
+      padding: 2em 0 1em 0;
+      background: none;
+    }
+    .contact-section {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #ddd;
+    }
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    .email-form label {
+      font-weight: 500;
+    }
+    .email-form input[type="text"], 
+    .email-form input[type="email"], 
+    .email-form textarea {
+      padding: 0.7em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .email-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .email-form button {
+      background: #666666;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.8em 1.5em;
+      font-size: 1em;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.15s;
+    }
+    .email-form button:hover {
+      background: #555555;
+    }
+    .subscribe-section {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #ddd;
+    }
+    .subscribe-section p {
+      margin-bottom: 1rem;
+      font-size: 0.95em;
+      color: #555;
+    }
+    .subscribe-input-group {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 500px;
+    }
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      padding: 0.7em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .subscribe-form button {
+      background: #666666;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.7em 1.2em;
+      font-size: 1em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .subscribe-form button:hover {
+      background: #555555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Project Space</h1>
+    <nav class="main-nav">
+  <a href="/" hx-get="/" hx-swap="innerHTML" hx-target="#content">Home</a>
+  <a href="/contact.html" hx-get="/contact.html" hx-swap="innerHTML" hx-target="#content">Contact</a>
+</nav>
+  </header>
+  <article id="post-content">
+    <h2>2D plotter Part 1</h2>
+    <time datetime="2018-07-08">July 08, 2018</time>
+    <div class="cover-image"><img src="/assets/images/img_20180117_213553.jpg" alt="Cover image"/></div>
+    <h2>Background:</h2>
+<p>Living in a small London flat in 2018 and having both a 2D and 3D printer is a bit frivolous. However, there are some occasions when you need to print the odd sheet of A4 so I thought why not kill two birds with one stone and enhance my 3D printer by adding a 2D printing option?</p>
+<h2>Goal:</h2>
+<p>Print on paper in 2D using my 3D printer</p>
+<h2>Stages:</h2>
+<p>Stage 1: Source pens with fine nibs, and design and 3D print a pen holder attachment.</p>
+<p>Stage 2: Create a process and program that enables the conversion of an image to G-code.</p>
+<p>Stage 3: Create a process that converts a pdf document to G-code, plotting to scale on an A4 sheet with no human intervention.</p>
+<h3>Stage 1</h3>
+<p>Ideally, I wanted to print text as small as size 12 font on A4 paper which would require fine nibs. I found a cheap set going down to 0.05mm in diameter with cylindrical bodies which provided suitable geometry for clamping.</p>
+<p>I designed a pen mount based on the pen dimensions with a clamp to hold the pen firmly during operation. It was a little tricky to retrofit it to my extruder but I managed to use a large penny washer to maximize the clamping surface area.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="IMG_20170202_204416" src="/assets/images/img_20170202_204416.jpg" />
+<figcaption>Extruder with pen mount</figcaption>
+</figure></p>
+<h3>Stage 2</h3>
+<p>I decided to use Python initially to create a program that could convert any image to G-code which my 3D printer could understand. Using the Python Imaging Library, I wrote a script that would take an image as an input, convert it to black and white and iterate through the pixels, row by row. For each line of pixels, if the line contained any black pixels, this line would be converted to G-code with "G1" linear move commands. Between each line, I added a z-hop command to raise the pen above the page to stop it from dragging on the paper. At the end of the G-code line - at the start of the next row - I reversed the G-code to reduce the print time and remove unnecessary travel moves so the plotter moves in a scanning motion.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="IMG_20170422_160841" src="/assets/images/img_20170422_160841.jpg" />
+<figcaption>Python plot of G-code</figcaption>
+</figure></p>
+<p>I created a plot to visualize the G-code and the printer produced the final result. It definitely is not the most efficient way of plotting but it produced quite a nice effect and reproduces simple images quite well.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="IMG_20170422_124909" src="/assets/images/img_20170422_124909.jpg" />
+<figcaption>Panda Plot on paper</figcaption>
+</figure></p>
+<p>Fast forward a few months and I discovered Fusion 360. As well as a 3D modeling package, it also has some impressive CAM functionality that can output G-Code that I can run directly on my 3D printer.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="f360.png" src="/assets/images/f360-e1532297008607.png" />
+<figcaption>Fusion 360 CAM</figcaption>
+</figure></p>
+<p>I found a practical use for the plotter - automating the production of my Christmas thank you letters. I created a postcard template in Fusion 360, positioned the text and used the trace CAM function to convert the text to G-code.</p>
+<p><figure class="image-container" style="max-width: 480px; margin: 0 auto;">
+<img alt="giphy" src="/assets/images/giphy.gif" />
+<figcaption>Plotter in action</figcaption>
+</figure></p>
+<p>It took about 10 minutes to plot one postcard which is a lot slower than by hand but I haven't tested the maximum speed out yet.</p>
+<p><figure class="image-container" style="max-width: 600px; margin: 0 auto;">
+<img alt="CARD_BLURRED" src="/assets/images/card_blurred.jpg" />
+<figcaption>Finished item</figcaption>
+</figure></p>
+<p>I was quite happy with the final result and thought it was a good sign when one of my elderly relatives to whom a postcard was sent commented that "nobody handwrites letters anymore".</p>
+<p>The final aim of this project is to print any document on an A4 sheet. This will require some linear actuation on my setup for the plotter to reach the entire length of the page due to the 200mm x 200mm limit on my 3D printer bed.</p>
+<p>Stay tuned for more 2D printing adventures.</p>
+    
+    <div class="contact-section">
+      <h3>Contact Me About This Post</h3>
+      <form class="email-form" action="mailto:your-email@example.com" method="post" enctype="text/plain">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required />
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" value="Re: 2D plotter Part 1" required />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+        <button type="submit">Send Email</button>
+      </form>
+    </div>
+    
+    <div class="subscribe-section">
+      <h3>Subscribe to Blog Updates</h3>
+      <p>Enter your email to receive notifications when new posts are published.</p>
+      <form class="subscribe-form" action="mailto:your-email@example.com?subject=Blog Subscription" method="post" enctype="text/plain">
+        <div class="subscribe-input-group">
+          <input type="email" id="subscribe-email" name="subscribe-email" placeholder="Your email address" required />
+          <button type="submit">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </article>
+  <footer class="site-footer">© jackchartres.xyz 2025</footer>
+</body>
+</html>

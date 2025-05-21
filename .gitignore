@@ -1,0 +1,8 @@
+# Python byte-code & virtualenv
+.venv/
+__pycache__/
+*.py[cod]
+
+# Windows Explorer thumbnails & metadata
+Thumbs.db
+desktop.ini

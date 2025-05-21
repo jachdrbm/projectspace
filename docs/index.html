@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Project Space</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://unpkg.com/htmx.org@1.10.2"></script>
+  <style>
+    body {
+      background-color: #23272f;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    
+header {
+  max-width: 1100px;
+  margin: 0 auto 2rem auto;
+  padding: 2rem 0 0 0;
+  background: none;
+  box-shadow: none;
+}
+header h1 {
+  margin: 0 0 0.5em 0;
+  font-size: 2.5rem;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-align: center;
+}
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+  background: #fff;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+.main-nav a {
+  color: #666666;
+  text-decoration: none;
+  padding: 0.3em 0.7em;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+.main-nav a:hover, .main-nav a.active {
+  background: #f0f0f0;
+}
+
+    #content {
+      background-color: white;
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+    .post-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .post-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    }
+    .post-card a {
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .card-image img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .card-content {
+      padding: 1.2rem 1rem 1rem 1rem;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .card-content h2 {
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem 0;
+      font-weight: 600;
+    }
+    .card-content time {
+      color: #888;
+      font-size: 0.95em;
+    }
+    .subscribe-section {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #ddd;
+    }
+    .subscribe-section h3 {
+      margin-bottom: 0.5rem;
+    }
+    .subscribe-section p {
+      margin-bottom: 1rem;
+      font-size: 0.95em;
+      color: #555;
+    }
+    .subscribe-input-group {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 500px;
+    }
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      padding: 0.7em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .subscribe-form button {
+      background: #666666;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.7em 1.2em;
+      font-size: 1em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .subscribe-form button:hover {
+      background: #555555;
+    }
+    .site-footer {
+      text-align: center;
+      color: #888;
+      font-size: 1em;
+      padding: 2em 0 1em 0;
+      background: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Project Space</h1>
+    <nav class="main-nav">
+  <a href="/" hx-get="/" hx-swap="innerHTML" hx-target="#content">Home</a>
+  <a href="/contact.html" hx-get="/contact.html" hx-swap="innerHTML" hx-target="#content">Contact</a>
+</nav>
+  </header>
+  <div id="content">
+    <div class="post-grid">
+      
+      <div class="post-card">
+        <a hx-get="/blog/automated-wheel-truing-stand-part-3.html #post-content" hx-swap="innerHTML" hx-target="#content" href="/blog/automated-wheel-truing-stand-part-3.html">
+          <div class="card-image"><img src="/assets/images/ats-1-e1541243372945.jpg" alt="Automated Wheel Truing Stand Part 3 cover"/></div>
+          <div class="card-content">
+            <h2>Automated Wheel Truing Stand Part 3</h2>
+            <time datetime="2019-01-13">January 13, 2019</time>
+          </div>
+        </a>
+      </div>
+    
+      <div class="post-card">
+        <a hx-get="/blog/automated-wheel-truing-stand-part-2.html #post-content" hx-swap="innerHTML" hx-target="#content" href="/blog/automated-wheel-truing-stand-part-2.html">
+          <div class="card-image"><img src="/assets/images/ats-2-e1541243575856.jpg" alt="Automated Wheel Truing Stand Part 2 cover"/></div>
+          <div class="card-content">
+            <h2>Automated Wheel Truing Stand Part 2</h2>
+            <time datetime="2018-12-03">December 03, 2018</time>
+          </div>
+        </a>
+      </div>
+    
+      <div class="post-card">
+        <a hx-get="/blog/2d-plotter.html #post-content" hx-swap="innerHTML" hx-target="#content" href="/blog/2d-plotter.html">
+          <div class="card-image"><img src="/assets/images/img_20180117_213553.jpg" alt="2D plotter Part 1 cover"/></div>
+          <div class="card-content">
+            <h2>2D plotter Part 1</h2>
+            <time datetime="2018-07-08">July 08, 2018</time>
+          </div>
+        </a>
+      </div>
+    
+      <div class="post-card">
+        <a hx-get="/blog/automated-truing-stand-part-1.html #post-content" hx-swap="innerHTML" hx-target="#content" href="/blog/automated-truing-stand-part-1.html">
+          <div class="card-image"><img src="/assets/images/ats-prototype-1-41-2-2.jpg" alt="Automated Wheel Truing Stand Part 1 cover"/></div>
+          <div class="card-content">
+            <h2>Automated Wheel Truing Stand Part 1</h2>
+            <time datetime="2018-06-23">June 23, 2018</time>
+          </div>
+        </a>
+      </div>
+    
+      <div class="post-card">
+        <a hx-get="/blog/the-journey-begins.html #post-content" hx-swap="innerHTML" hx-target="#content" href="/blog/the-journey-begins.html">
+          
+          <div class="card-content">
+            <h2>Welcome to my Projects website!</h2>
+            <time datetime="2018-06-22">June 22, 2018</time>
+          </div>
+        </a>
+      </div>
+    
+    </div>
+    
+    <div class="subscribe-section">
+      <h3>Subscribe to Blog Updates</h3>
+      <p>Enter your email to receive notifications when new posts are published.</p>
+      <form class="subscribe-form" action="mailto:your-email@example.com?subject=Blog Subscription" method="post" enctype="text/plain">
+        <div class="subscribe-input-group">
+          <input type="email" id="subscribe-email" name="subscribe-email" placeholder="Your email address" required />
+          <button type="submit">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <footer class="site-footer">© jackchartres.xyz 2025</footer>
+</body>
+</html>
