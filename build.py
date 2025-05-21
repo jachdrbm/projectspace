@@ -68,6 +68,7 @@ TEMPLATES_DIR = "templates"
 # Ensure output directories exist
 os.makedirs(ASSETS_DIR, exist_ok=True)
 os.makedirs("docs/vendor", exist_ok=True)
+os.makedirs("docs/blog", exist_ok=True)  # Ensure blog directory exists
 
 # Load posts
 posts = []
@@ -132,24 +133,21 @@ posts.sort(key=lambda x: x['date'], reverse=True)
 
 # Generate per-post HTML pages
 for p in posts:
-    # Create directory structure for new URL format: YYYY/MM/DD/slug/
-    year = p['date'].strftime('%Y')
-    month = p['date'].strftime('%m')
-    day = p['date'].strftime('%d')
-    post_dir = os.path.join(BLOG_DIR, year, month, day, p['slug'])
+    # Place files in the /blog/ directory with slug as filename
+    post_dir = os.path.join(BLOG_DIR, "blog")
     
     # Ensure the directory exists
     os.makedirs(post_dir, exist_ok=True)
     
     # Define the URL path for this post (for navigation)
-    post_url = f"/{year}/{month}/{day}/{p['slug']}/"
+    post_url = f"/blog/{p['slug']}.html"
     
     cover_html = ''
     if p['coverImage']:
         cover_html = f'<div class="cover-image"><img src="{ASSETS_DIR_URL}/{p["coverImage"]}" alt="Cover image"/></div>'
     
     # Calculate relative path to root for CSS and scripts
-    relative_path_to_root = "../../../../"
+    relative_path_to_root = "../"
     
     page_html = f'''<!DOCTYPE html>
 <html lang="en">
@@ -360,19 +358,16 @@ for p in posts:
   {FOOTER_HTML.format(year=current_year)}
 </body>
 </html>'''  
-    # Write the index.html file in the post directory
-    with open(os.path.join(post_dir, "index.html"), 'w', encoding='utf-8') as f:
+    # Write the HTML file in the blog directory with slug as filename
+    with open(os.path.join(post_dir, f"{p['slug']}.html"), 'w', encoding='utf-8') as f:
         f.write(page_html)
 
 # Generate grid of cards for index
 card_items = ''
 for p in posts:
     date_str = p['date'].strftime('%B %d, %Y')
-    # Create the post URL in the new format
-    year = p['date'].strftime('%Y')
-    month = p['date'].strftime('%m')
-    day = p['date'].strftime('%d')
-    post_url = f"/{year}/{month}/{day}/{p['slug']}/"
+    # Create the post URL in the blog directory
+    post_url = f"/blog/{p['slug']}.html"
     
     cover_html = ''
     if p['coverImage']:
